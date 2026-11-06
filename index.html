@@ -1,305 +1,174 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>کاوشگر هندسه هشتم | ماهان اکبری</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>کاوشگر هندسه | توازی، تعامد و محاسبه x</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
-:root{--bg:#080e1c;--panel:#14223b;--panel2:#0b172b;--stroke:#30486c;--txt:#eff6ff;--muted:#b2c1d9;--accent:#55e0f2;--accent2:#b39aff;--good:#59dfa9;--gold:#ffd17d;--shadow:#0005}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 82% 0%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 36%),var(--bg);color:var(--txt);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.85;transition:background .25s,color .25s}
-.wrap{max-width:1120px;margin:auto;padding:16px}
-.hero{padding:24px 4px 17px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.kicker{color:var(--accent);font-size:13px;font-weight:800}
-h1{font-size:clamp(26px,5vw,42px);margin:4px 0;font-weight:900}
-.subtitle{color:var(--muted);margin:0}
-.panel{background:var(--panel);border:1px solid var(--stroke);border-radius:20px;padding:18px;box-shadow:0 12px 35px var(--shadow)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-button,select,input{font:inherit}
-button,select{background:var(--panel2);color:var(--txt);border:1px solid var(--stroke);border-radius:12px;padding:10px 14px;cursor:pointer}
-button:hover{border-color:var(--accent);transform:translateY(-1px)}
-button.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#07101e;border:0;font-weight:900}
-input[type=range]{width:100%;accent-color:var(--accent)}
-input[type=number]{width:90px;background:var(--panel2);color:var(--txt);border:1px solid var(--stroke);border-radius:10px;padding:9px}
-.tabs{display:flex;gap:8px;overflow:auto;padding:8px 0 14px}
-.tabs button{white-space:nowrap}
-.tabs button.active{background:var(--accent);color:#07101e;border-color:transparent;font-weight:900}
-.view{display:none}.view.active{display:block}
-h2{font-size:21px;margin:0 0 10px}
-h3{font-size:17px;margin:0 0 8px}
-.muted{color:var(--muted)}
-.big{font-size:28px;font-weight:900;color:var(--accent)}
-.stat{display:flex;gap:9px;flex-wrap:wrap}
-.stat span{background:var(--panel2);border:1px solid var(--stroke);padding:7px 12px;border-radius:12px}
-.formula{background:var(--panel2);border:1px solid var(--stroke);padding:12px;border-radius:14px;text-align:center;font-size:21px;margin:10px 0}
-svg{max-width:100%;height:auto}
-.note{border-right:4px solid var(--accent);padding:8px 12px;background:var(--panel2);border-radius:10px}
-.hidden{display:none!important}
-.question{font-size:18px;font-weight:800;margin:12px 0}
-.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.choices button{min-height:48px}
-.feedback{padding:11px;border-radius:12px;margin-top:10px}
-.good{background:#1c9b7040;border:1px solid var(--good)}
-.bad{background:#e64e6840;border:1px solid #ff7085}
-.bar{height:9px;background:var(--panel2);border-radius:20px;overflow:hidden}
-.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}
-footer{text-align:center;color:var(--muted);padding:24px}
-@media(max-width:560px){.wrap{padding:10px}.panel{padding:14px}.choices{grid-template-columns:1fr 1fr}}
+:root{--bg:#0b1020;--panel:#141d33;--panel2:#1b2945;--text:#eef4ff;--muted:#aab8d2;--accent:#54d6c8;--accent2:#8b7cff;--line:#2c3c5d;--good:#4ade80;--bad:#fb7185;--gold:#fbbf24;--shadow:0 14px 35px #0005}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#263b68 0,transparent 34%),var(--bg);color:var(--text);font-family:Tahoma,"Segoe UI",sans-serif;line-height:1.8;min-height:100vh}
+button,select,input{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:10px 16px;background:linear-gradient(135deg,var(--accent),#36a9b8);color:#07131d;font-weight:800;transition:.2s}button:hover{transform:translateY(-2px);filter:brightness(1.08)}button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+header{max-width:1180px;margin:auto;padding:25px 20px 12px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;gap:13px;align-items:center}.logo{width:54px;height:54px;border-radius:17px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#091426;font-size:27px;font-weight:900;box-shadow:var(--shadow)}
+h1{font-size:clamp(21px,4vw,34px);margin:0;line-height:1.4}.sub{color:var(--muted);font-size:13px}.creator{color:var(--accent);font-weight:800}
+.wrap{max-width:1180px;margin:auto;padding:12px 20px 55px}.topbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.topbar select{background:var(--panel);color:var(--text);border:1px solid var(--line);padding:9px 12px;border-radius:12px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:12px 0 18px;scrollbar-width:thin}.tab{white-space:nowrap;background:var(--panel);color:var(--muted);border:1px solid var(--line)}.tab.active{background:var(--accent);color:#07131d;border-color:transparent}
+.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.card{background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel2) 70%,var(--panel)));border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);min-width:0}.card h2,.card h3{margin:0 0 10px}.muted{color:var(--muted)}.pill{display:inline-block;padding:3px 10px;border-radius:30px;background:var(--panel2);color:var(--accent);font-size:12px;margin:2px}
+.stage{min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}.diagram{width:100%;max-width:560px;background:#f7f9ff;border-radius:17px;overflow:hidden}.diagram svg{width:100%;height:auto;display:block}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.controls label{color:var(--muted);font-size:14px}.controls input[type=range]{accent-color:var(--accent);width:min(240px,60vw)}
+.info{background:var(--panel2);border:1px solid var(--line);padding:13px 15px;border-radius:15px;margin:10px 0}.formula{font-size:19px;font-weight:900;color:var(--gold);direction:ltr;text-align:center;padding:10px}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.stat{background:var(--panel2);border-radius:15px;padding:12px;text-align:center}.stat strong{font-size:22px;color:var(--accent);display:block}.stat small{color:var(--muted)}
+.question{font-size:18px;font-weight:700;margin:12px 0}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}.answer{background:var(--panel2);color:var(--text);border:1px solid var(--line);text-align:center}.answer.selected{border:2px solid var(--accent)}.feedback{padding:12px;border-radius:13px;margin-top:12px;display:none}.feedback.good{display:block;background:#123b2b;color:#b8f7ce}.feedback.bad{display:block;background:#48202b;color:#ffd0d8}
+.progress{height:9px;background:var(--panel2);border-radius:20px;overflow:hidden}.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.3s}
+.list{display:grid;gap:9px}.rowitem{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--line);padding:11px 13px;border-radius:13px}
+.hidden{display:none!important}.small{font-size:12px}.footer{text-align:center;color:var(--muted);padding:25px 0 0;font-size:13px}
+input[type=number]{width:100%;max-width:180px;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);direction:ltr}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.card{padding:16px}.stage{min-height:250px}.statrow{grid-template-columns:repeat(3,1fr)}}
+body[data-theme="light"]{--bg:#edf3fb;--panel:#fff;--panel2:#e7eef8;--text:#17243b;--muted:#5e6e87;--line:#ccd8e8;--shadow:0 10px 25px #19345a18}
+body[data-theme="forest"]{--bg:#071b18;--panel:#102b25;--panel2:#183b32;--text:#e7fff4;--muted:#a5c9bb;--accent:#75e0a6;--accent2:#d0bd69;--line:#285347}
+body[data-theme="sunset"]{--bg:#24131b;--panel:#3a202b;--panel2:#512c39;--text:#fff0e8;--muted:#e0b9ad;--accent:#ffb36b;--accent2:#ff6f91;--line:#704251}
+body[data-theme="ocean"]{--bg:#071b2b;--panel:#102d43;--panel2:#17415b;--text:#e8f8ff;--muted:#a6c9db;--accent:#5ee2ed;--accent2:#68a8ff;--line:#28536d}
+body[data-theme="mono"]{--bg:#111;--panel:#202020;--panel2:#303030;--text:#f5f5f5;--muted:#bbb;--accent:#fff;--accent2:#aaa;--line:#555}
 </style>
 </head>
-<body>
-<div class="wrap">
-<header class="hero">
-<div><div class="kicker">آزمایشگاه تعاملی ریاضی · پایه هشتم</div>
-<h1>کاوشگر هندسه هشتم</h1>
-<p class="subtitle">توازی، تعامد، چندضلعی‌ها و حل مسئله؛ با یادگیری و تمرین تعاملی</p>
-</div>
-<div class="row"><select id="theme"><option value="default">آبی فیروزه‌ای</option><option value="purple">بنفش</option><option value="green">سبز</option><option value="orange">نارنجی</option><option value="light">روشن</option></select></div>
+<body data-theme="midnight">
+<header>
+ <div class="brand"><div class="logo">∠</div><div><h1>کاوشگر هندسه</h1><div class="sub">توازی • تعامد • کشف زاویه‌ها • محاسبه x</div></div></div>
+ <div class="topbar"><span class="creator">سازنده: ماهان اکبری</span><select id="theme"><option value="midnight">تم نیمه‌شب</option><option value="light">تم روشن</option><option value="forest">تم جنگلی</option><option value="sunset">تم غروب</option><option value="ocean">تم اقیانوسی</option><option value="mono">تم تک‌رنگ</option></select></div>
 </header>
-<div class="stat">
-<span>⭐ امتیاز: <b id="score">۰</b></span>
-<span>✅ پاسخ درست: <b id="correctCount">۰</b></span>
-<span>📝 پاسخ داده‌شده: <b id="doneCount">۰</b></span>
-</div>
-<nav class="tabs">
-<button class="active" data-view="discover">کاوش توازی</button>
-<button data-view="trans">تعامد</button>
-<button data-view="polygon">چندضلعی‌ها</button>
-<button data-view="learn">آموزش</button>
-<button data-view="solve">حل‌گر x</button>
-<button data-view="bank">بانک ۱۰۰۰ سؤال</button>
-</nav>
+<main class="wrap">
+ <div class="statrow">
+  <div class="stat"><strong id="score">0</strong><small>امتیاز</small></div>
+  <div class="stat"><strong id="solved">0</strong><small>پاسخ درست</small></div>
+  <div class="stat"><strong id="bankCount">1000</strong><small>تمرین در بانک</small></div>
+ </div>
+ <div class="tabs">
+  <button class="tab active" data-page="discover">آزمایشگاه اکتشافی</button>
+  <button class="tab" data-page="learn">درس‌نامه هوشمند</button>
+  <button class="tab" data-page="practice">تمرین محاسبه x</button>
+  <button class="tab" data-page="quiz">آزمون تصادفی</button>
+  <button class="tab" data-page="bank">بانک ۱۰۰۰ سؤالی</button>
+ </div>
 
-<section class="view active" id="discover">
-<div class="grid">
-<div class="panel">
-<h2>آزمایش خط‌های موازی</h2>
-<p class="muted">شیب خط‌ها را تغییر بده و رابطه زاویه‌ها را کشف کن.</p>
-<label>زاویه خط مورب: <b id="slopeVal">۴۵°</b></label>
-<input id="slope" type="range" min="10" max="170" value="45">
-<div class="formula" id="parallelRead">زاویه متناظر برابر است.</div>
-<svg viewBox="0 0 420 230" width="100%" role="img" aria-label="دو خط موازی و یک خط مورب">
-<line x1="35" y1="65" x2="385" y2="65" stroke="var(--accent)" stroke-width="4"/>
-<line x1="35" y1="165" x2="385" y2="165" stroke="var(--accent)" stroke-width="4"/>
-<line id="transversal" x1="100" y1="15" x2="250" y2="215" stroke="var(--gold)" stroke-width="4"/>
-<circle cx="137" cy="65" r="5" fill="var(--txt)"/><circle cx="212" cy="165" r="5" fill="var(--txt)"/>
-<text x="20" y="45" fill="var(--txt)" font-size="14">خط اول</text><text x="20" y="195" fill="var(--txt)" font-size="14">خط دوم</text>
-</svg>
-<div class="note">در دو خط موازی، زاویه‌های متناظر برابرند و زاویه‌های داخلی هم‌جهت مکمل‌اند.</div>
-</div>
-<div class="panel">
-<h2>کشف رابطه زاویه‌ها</h2>
-<p>اگر یک زاویه ۶۵ درجه باشد:</p>
-<div class="formula">متناظر = ۶۵°</div>
-<div class="formula">داخلی هم‌جهت = ۱۱۵°</div>
-<p class="muted">چون ۶۵ + ۱۱۵ = ۱۸۰ درجه است.</p>
-</div>
-</div>
-</section>
+ <section id="discover" class="page">
+  <div class="grid">
+   <div class="card">
+    <h2>آزمایشگاه خطوط موازی</h2><p class="muted">زاویه را تغییر بده و رابطه زاویه‌ها را خودت کشف کن.</p>
+    <div class="stage"><div class="diagram"><svg id="parallelSvg" viewBox="0 0 520 310" role="img" aria-label="دو خط موازی و یک مورب">
+     <rect width="520" height="310" fill="#f7f9ff"/><g stroke="#1767a5" stroke-width="4"><path d="M35 90 H485"/><path d="M35 230 H485"/></g><path d="M135 270 L385 35" stroke="#dc633d" stroke-width="4"/>
+     <g fill="#17243b" font-size="16" font-weight="bold"><text x="450" y="75">l</text><text x="450" y="215">m</text><text x="385" y="28">t</text></g>
+     <g fill="none" stroke="#dc633d" stroke-width="2"><path id="arc1" d="M260 90 A45 45 0 0 0 292 58"/><path id="arc2" d="M410 230 A45 45 0 0 0 442 198"/></g>
+     <g fill="#17243b" font-size="18" font-weight="bold"><text id="ang1" x="285" y="82">?</text><text id="ang2" x="425" y="222">?</text></g>
+     <g stroke="#dc633d" stroke-width="3"><path d="M35 80 l10 10 m-10 0 l10 -10"/><path d="M35 220 l10 10 m-10 0 l10 -10"/></g>
+    </svg></div>
+    <div class="controls"><label>زاویه برخورد: <b id="angleVal">55°</b></label><input id="angleRange" type="range" min="20" max="160" value="55"></div>
+    <div class="info" id="discoverText">زاویه‌های متناظر را پیدا کن: آیا اندازه آن‌ها برابر است؟</div>
+    <div class="controls"><button class="secondary" id="showCorrespond">زاویه متناظر</button><button class="secondary" id="showAlternate">متناوب داخلی</button><button class="secondary" id="showSame">داخلی هم‌جهت</button></div>
+   </div>
+   <div class="card">
+    <h2>کشف تعامد</h2><p class="muted">خط عمود چه ویژگی ویژه‌ای دارد؟</p>
+    <div class="stage"><div class="diagram"><svg viewBox="0 0 520 310">
+     <rect width="520" height="310" fill="#f7f9ff"/><path d="M65 155 H455" stroke="#1767a5" stroke-width="5"/><path d="M260 35 V275" stroke="#dc633d" stroke-width="5"/><path d="M260 155 h-25 v-25" fill="none" stroke="#17243b" stroke-width="3"/><g fill="#17243b" font-size="18" font-weight="bold"><text x="440" y="140">a</text><text x="278" y="50">b</text><text x="278" y="184">۹۰°</text></g>
+    </svg></div><div class="formula">a ⟂ b  ⇔  زاویه = ۹۰°</div><div class="info">اگر دو خط همدیگر را با زاویه قائمه قطع کنند، بر هم عمودند.</div></div>
+    <div class="info"><b>چالش کشف:</b> اگر یک زاویه ۹۰ درجه باشد، سه زاویه دیگر اطراف نقطه چند درجه‌اند؟</div>
+    <button id="perpHint" class="secondary">راهنمایی مرحله‌ای</button><p id="perpAnswer" class="muted"></p>
+   </div>
+  </div>
+ </section>
 
-<section class="view" id="trans">
-<div class="grid">
-<div class="panel">
-<h2>آزمایش تعامد</h2>
-<p class="muted">زاویه بین دو خط را تغییر بده.</p>
-<label>زاویه: <b id="perpVal">۹۰°</b></label>
-<input id="perpRange" type="range" min="0" max="180" value="90">
-<div class="formula" id="perpMsg">دو خط بر هم عمودند ⟂</div>
-<svg viewBox="0 0 360 240" width="100%">
-<line x1="180" y1="25" x2="180" y2="215" stroke="var(--accent)" stroke-width="4"/>
-<line id="right" x1="35" y1="120" x2="325" y2="120" stroke="var(--gold)" stroke-width="4"/>
-<circle cx="180" cy="120" r="5" fill="var(--txt)"/>
-</svg>
-</div>
-<div class="panel">
-<h2>چه زمانی دو خط عمودند؟</h2>
-<div class="big">۹۰ درجه</div>
-<p>اگر زاویه بین دو خط قائمه باشد، آن دو خط بر هم عمود هستند.</p>
-</div>
-</div>
-</section>
+ <section id="learn" class="page hidden">
+  <div class="grid">
+   <div class="card"><h2>قواعد طلایی توازی</h2>
+    <div class="info"><b>زاویه‌های متناظر:</b> در دو خط موازی، برابرند.</div>
+    <div class="info"><b>زاویه‌های متناوب داخلی:</b> برابرند.</div>
+    <div class="info"><b>زاویه‌های داخلی هم‌جهت:</b> مجموعشان ۱۸۰ درجه است.</div>
+    <div class="info"><b>زاویه‌های متقابل به رأس:</b> برابرند؛ حتی بدون موازی بودن دو خط.</div>
+    <div class="info"><b>زاویه‌های مجاور روی خط راست:</b> مجموعشان ۱۸۰ درجه است.</div>
+   </div>
+   <div class="card"><h2>قواعد تعامد و چندضلعی</h2>
+    <div class="info"><b>تعامد:</b> دو خط عمود، چهار زاویه قائمه می‌سازند.</div>
+    <div class="info"><b>مجموع زاویه‌های داخلی n ضلعی:</b><div class="formula">(n − 2) × 180°</div></div>
+    <div class="info"><b>هر زاویه داخلی چندضلعی منتظم:</b><div class="formula">((n − 2) × 180°) ÷ n</div></div>
+    <div class="info"><b>مجموع زاویه‌های خارجی:</b><div class="formula">360°</div></div>
+    <p class="muted small">نکته: برای پیدا کردن x، اول رابطه زاویه‌ها را تشخیص بده؛ بعد معادله بساز و حل کن.</p>
+   </div>
+  </div>
+ </section>
 
-<section class="view" id="polygon">
-<div class="panel">
-<h2>آزمایش چندضلعی منتظم</h2>
-<p class="muted">تعداد ضلع‌ها را تغییر بده.</p>
-<label>تعداد ضلع‌ها: <b id="sidesVal">۵</b></label>
-<input id="sides" type="range" min="3" max="12" value="5">
-<div class="grid">
-<div class="panel"><div class="muted">مجموع زاویه‌های داخلی</div><div class="big" id="sumPoly">۵۴۰°</div></div>
-<div class="panel"><div class="muted">هر زاویه داخلی</div><div class="big" id="eachPoly">۱۰۸°</div></div>
-</div>
-<svg id="polygon" viewBox="0 0 360 260" width="100%"></svg>
-<div class="note" id="polyExplain">فرمول مجموع زاویه‌های داخلی: (n−۲)×۱۸۰</div>
-</div>
-</section>
+ <section id="practice" class="page hidden">
+  <div class="grid">
+   <div class="card"><h2>حل‌کننده x</h2><p class="muted">نوع رابطه را انتخاب کن و معادله را حل کن.</p>
+    <select id="practiceType" style="width:100%;padding:12px;border-radius:12px;background:var(--panel2);color:var(--text);border:1px solid var(--line)">
+     <option value="sum">مجاور روی خط راست: دو زاویه مکمل</option><option value="equal">زاویه‌های برابر</option><option value="poly">مجموع زاویه‌های چندضلعی</option><option value="right">زاویه‌های متمم</option>
+    </select>
+    <div class="diagram" style="margin:15px auto"><svg viewBox="0 0 520 230"><rect width="520" height="230" fill="#f7f9ff"/><path d="M60 170 H460" stroke="#1767a5" stroke-width="4"/><path d="M260 170 L360 35" stroke="#dc633d" stroke-width="4"/><path d="M260 170 L155 55" stroke="#dc633d" stroke-width="4"/><g fill="#17243b" font-size="22" font-weight="bold"><text x="315" y="145" id="pLabel1">2x + 20</text><text x="155" y="145" id="pLabel2">x + 10</text></g></svg></div>
+    <div class="question" id="practiceQ">دو زاویه مجاور روی خط راست به اندازه‌های 2x+20 و x+10 هستند. x را بیاب.</div>
+    <div class="controls"><label>پاسخ x:</label><input id="practiceInput" type="number" placeholder="عدد را وارد کن"><button id="checkPractice">بررسی پاسخ</button><button class="secondary" id="newPractice">سؤال تازه</button></div>
+    <div id="practiceFeedback" class="feedback"></div>
+   </div>
+   <div class="card"><h2>روش حل را بنویس</h2><div class="info">۱. رابطه زاویه‌ها را مشخص کن.</div><div class="info">۲. معادله مناسب را بنویس.</div><div class="info">۳. جمله‌های هم‌نوع را جمع کن.</div><div class="info">۴. x را تنها کن و جواب را کنترل کن.</div><p class="muted">در این بخش جواب نهایی مهم است، اما دلیل رسیدن به آن مهم‌تر است.</p></div>
+  </div>
+ </section>
 
-<section class="view" id="learn">
-<div class="grid">
-<div class="panel"><h2>زاویه‌های متقابل به رأس</h2><p>وقتی دو خط همدیگر را قطع کنند، زاویه‌های روبه‌رو با هم برابرند.</p><div class="formula">∠۱ = ∠۳</div></div>
-<div class="panel"><h2>زاویه‌های مجاور روی خط راست</h2><p>مجموع دو زاویه مجاور که یک خط راست می‌سازند ۱۸۰ درجه است.</p><div class="formula">a + b = ۱۸۰°</div></div>
-<div class="panel"><h2>مجموع زاویه‌های مثلث</h2><p>مجموع سه زاویه داخلی هر مثلث ۱۸۰ درجه است.</p><div class="formula">A + B + C = ۱۸۰°</div></div>
-<div class="panel"><h2>مجموع زاویه‌های چهارضلعی</h2><p>مجموع زاویه‌های داخلی هر چهارضلعی ۳۶۰ درجه است.</p><div class="formula">۳۶۰°</div></div>
-<div class="panel"><h2>مجموع زاویه‌های چندضلعی</h2><div class="formula">(n − ۲) × ۱۸۰°</div><p>n تعداد ضلع‌هاست.</p></div>
-<div class="panel"><h2>چندضلعی منتظم</h2><p>در چندضلعی منتظم، همه ضلع‌ها و زاویه‌ها برابرند.</p><div class="formula">هر زاویه داخلی = مجموع ÷ n</div></div>
-</div>
-</section>
+ <section id="quiz" class="page hidden">
+  <div class="grid">
+   <div class="card"><div class="rowitem"><b>آزمون ۱۰ سؤالی</b><span class="pill" id="quizProgress">سؤال ۱ از ۱۰</span></div><div class="progress"><span id="quizBar"></span></div>
+    <div id="quizArea"></div><div class="controls"><button id="nextQuiz">سؤال بعدی</button><button class="secondary" id="restartQuiz">شروع دوباره</button></div><div id="quizFeedback" class="feedback"></div>
+   </div>
+   <div class="card"><h2>راهنمای آزمون</h2><p>سؤال‌ها از موضوع‌های مختلف انتخاب می‌شوند: توازی، تعامد، چندضلعی، زاویه‌های متقابل به رأس، معادله‌های x و استدلال هندسی.</p><div class="stat"><strong>۱۰</strong><small>سؤال در هر آزمون</small></div><p class="muted small">هر پاسخ درست ۱۰ امتیاز دارد. پاسخ را با دقت انتخاب کن.</p></div>
+  </div>
+ </section>
 
-<section class="view" id="solve">
-<div class="panel">
-<h2>حل‌گر معادله x</h2>
-<p>معادله‌ای به شکل ax + b = c وارد کن.</p>
-<div class="row">
-<label>a: <input id="x1" type="number" value="2"></label>
-<label>b: <input id="x2" type="number" value="30"></label>
-<label>c: <input id="x3" type="number" value="90"></label>
-</div>
-<div class="formula" id="xlab">۲x + ۳۰ = ۹۰</div>
-<button class="primary" id="solve">محاسبه x</button>
-<div id="xresult" class="feedback hidden"></div>
-</div>
-</section>
-
-<section class="view" id="bank">
-<div class="panel">
-<div class="row" style="justify-content:space-between">
-<div><h2>بانک ۱۰۰۰ سؤال هندسه</h2><p class="muted">تمرین تصادفی، پاسخ چهارگزینه‌ای و توضیح پاسخ</p></div>
-<select id="topic">
-<option value="all">همه مباحث</option>
-<option value="line">زاویه‌های روی خط</option>
-<option value="vertical">متقابل به رأس</option>
-<option value="parallel">خطوط موازی</option>
-<option value="triangle">مثلث</option>
-<option value="quad">چهارضلعی</option>
-<option value="polygon">چندضلعی</option>
-<option value="regular">منتظم</option>
-<option value="perp">تعامد</option>
-</select>
-</div>
-<div class="bar"><span id="bankProgress"></span></div>
-<p class="muted" id="bankMeta">آماده شروع</p>
-<div class="question" id="bankQuestion">برای شروع روی سؤال جدید بزن.</div>
-<div class="choices" id="bankChoices"></div>
-<div id="bankFeedback" class="feedback hidden"></div>
-<div class="row" style="margin-top:12px">
-<button class="primary" id="newSet">سؤال جدید</button>
-<button id="nextBank">سؤال بعدی</button>
-<button id="resetStats">پاک کردن آمار</button>
-</div>
-</div>
-</section>
-</div>
-<footer>کاوشگر هندسه هشتم · سازنده: ماهان اکبری</footer>
-
+ <section id="bank" class="page hidden">
+  <div class="card"><h2>بانک بزرگ تمرین‌ها</h2><p class="muted">۱۰۰۰ تمرین متنوع و تولیدشده از الگوهای گوناگون؛ هر بار می‌توانی مجموعه تازه‌ای ببینی.</p>
+   <div class="controls"><select id="bankTopic" style="padding:10px;border-radius:12px;background:var(--panel2);color:var(--text);border:1px solid var(--line)"><option value="all">همه موضوع‌ها</option><option value="parallel">توازی</option><option value="perpendicular">تعامد</option><option value="polygon">چندضلعی‌ها</option><option value="x">محاسبه x</option><option value="reason">استدلال هندسی</option></select><button id="generateBank">ساخت ۱۰ سؤال تازه</button><button class="secondary" id="randomBank">یک سؤال تصادفی</button></div>
+   <div class="statrow"><div class="stat"><strong>۱۰۰۰</strong><small>تمرین قابل تولید</small></div><div class="stat"><strong>۵</strong><small>دسته اصلی</small></div><div class="stat"><strong>∞</strong><small>ترکیب‌های تمرینی</small></div></div>
+   <div id="bankList" class="list"></div>
+  </div>
+ </section>
+ <div class="footer">کاوشگر هندسه هشتم • یادگیری با کشف کردن • <span class="creator">سازنده: ماهان اکبری</span></div>
+</main>
 <script>
 const $=id=>document.getElementById(id);
-const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
-const themes={
-default:['#080e1c','#14223b','#0b172b','#55e0f2','#b39aff','#eff6ff','#b2c1d9','#30486c'],
-purple:['#100b20','#21153a','#160e2b','#bd8cff','#ff7bd5','#fff3ff','#cbb9e8','#523b70'],
-green:['#071a16','#123329','#0b241d','#5ee0a0','#c2ef79','#effff6','#b5d8c6','#315d4c'],
-orange:['#1b1008','#392313','#241507','#ffad5c','#ffe08a','#fff7eb','#e5c9aa','#69472c'],
-light:['#edf3fb','#ffffff','#e5edf7','#287dbd','#7654c8','#152238','#52647b','#cbd6e5']
-};
-$('theme').onchange=e=>{
-let t=themes[e.target.value]||themes.default;
-['--bg','--panel','--panel2','--accent','--accent2','--txt','--muted','--stroke'].forEach((v,i)=>document.documentElement.style.setProperty(v,t[i]));
-};
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
-document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
-document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-b.classList.add('active');$(b.dataset.view).classList.add('active');
-});
-function updateSlope(){
-let a=+$('slope').value;
-$('slopeVal').textContent=fa(a)+'°';
-$('parallelRead').textContent='زاویه متناظر '+fa(a)+'° و زاویه داخلی هم‌جهت '+fa(180-a)+'° است.';
-let rad=a*Math.PI/180;
-let x1=210-125*Math.cos(rad),y1=115-125*Math.sin(rad);
-let x2=210+125*Math.cos(rad),y2=115+125*Math.sin(rad);
-$('transversal').setAttribute('x1',x1);$('transversal').setAttribute('y1',y1);
-$('transversal').setAttribute('x2',x2);$('transversal').setAttribute('y2',y2);
+let score=0,solved=0,bankOffset=0,quiz=[],qi=0,qAnswered=false;
+const fa=n=>String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+$("theme").addEventListener("change",e=>document.body.dataset.theme=e.target.value);
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));b.classList.add("active");$(b.dataset.page).classList.remove("hidden");});
+function addScore(n=10){score+=n;solved++;$("score").textContent=fa(score);$("solved").textContent=fa(solved)}
+function angleUpdate(){let a=+$("angleRange").value;$("angleVal").textContent=fa(a)+"°";$("ang1").textContent=fa(a)+"°";$("ang2").textContent=fa(a)+"°";}
+$("angleRange").oninput=angleUpdate;angleUpdate();
+$("showCorrespond").onclick=()=>$("discoverText").textContent="زاویه‌های متناظر برابرند؛ پس اندازه هر دو "+$("angleVal").textContent+" است.";
+$("showAlternate").onclick=()=>$("discoverText").textContent="زاویه‌های متناوب داخلی برابرند؛ این برابری از موازی بودن دو خط نتیجه می‌شود.";
+$("showSame").onclick=()=>{$("discoverText").textContent="دو زاویه داخلی هم‌جهت مکمل‌اند؛ مجموعشان ۱۸۰ درجه است. زاویه دیگر "+fa(180-+$("angleRange").value)+" درجه می‌شود."};
+$("perpHint").onclick=()=>{$("perpAnswer").textContent="چهار زاویه اطراف یک نقطه روی دو خط متقاطع، در مجموع ۳۶۰ درجه‌اند. زاویه‌های متقابل به رأس برابرند؛ بنابراین هر چهار زاویه ۹۰ درجه‌اند.";};
+let pData={type:"sum",x:20,a:2,b:1,c:20,d:10};
+function makePractice(){let t=$("practiceType").value,x=6+Math.floor(Math.random()*19);pData={type:t,x};
+if(t==="sum"){let a=1+Math.floor(Math.random()*3),b=1+Math.floor(Math.random()*2),c=10+Math.floor(Math.random()*35),d=10+Math.floor(Math.random()*30);let sol=(180-c-d)/(a+b);if(!Number.isInteger(sol)||sol<1){x=12;a=2;b=1;c=30;d=24;sol=(180-c-d)/3}pData={type:t,x:sol,a,b,c,d};$("practiceQ").textContent=`دو زاویه مجاور روی خط راست ${a}x+${c} و ${b}x+${d} هستند. x را بیاب.`;$("pLabel1").textContent=`${a}x + ${c}`;$("pLabel2").textContent=`${b}x + ${d}`}
+else if(t==="equal"){let a=2+Math.floor(Math.random()*3),b=1+Math.floor(Math.random()*2),c=5+Math.floor(Math.random()*20),d=1+Math.floor(Math.random()*15);let sol=(d-c)/(a-b);if(!Number.isInteger(sol)||sol<0){a=3;b=1;c=10;d=30;sol=10}pData={type:t,x:sol,a,b,c,d};$("practiceQ").textContent=`دو زاویه متناظر برابرند و اندازه آن‌ها ${a}x+${c} و ${b}x+${d} است. x را بیاب.`;$("pLabel1").textContent=`${a}x + ${c}`;$("pLabel2").textContent=`${b}x + ${d}`}
+else if(t==="right"){let a=1+Math.floor(Math.random()*3),b=1+Math.floor(Math.random()*2),c=5+Math.floor(Math.random()*20),d=5+Math.floor(Math.random()*20);let sol=(90-c-d)/(a+b);if(!Number.isInteger(sol)||sol<0){a=2;b=1;c=15;d=15;sol=20}pData={type:t,x:sol,a,b,c,d};$("practiceQ").textContent=`دو زاویه متمم‌اند؛ اندازه آن‌ها ${a}x+${c} و ${b}x+${d} است. x را بیاب.`;$("pLabel1").textContent=`${a}x + ${c}`;$("pLabel2").textContent=`${b}x + ${d}`}
+else{let n=5+Math.floor(Math.random()*4),sum=(n-2)*180,known=Array.from({length:n-1},()=>20+Math.floor(Math.random()*35));let remain=sum-known.reduce((a,b)=>a+b,0);pData={type:t,x:remain,n,sum,known};$("practiceQ").textContent=`یک ${n} ضلعی داریم. ${n-1} زاویه آن به‌ترتیب ${known.join("، ")} درجه‌اند. زاویه آخر (x) چند درجه است؟`;$("pLabel1").textContent=`x = ?`;$("pLabel2").textContent=`Σ=${sum}°`;}
+$("practiceInput").value="";$("practiceFeedback").className="feedback";$("practiceFeedback").textContent="";}
+$("practiceType").onchange=makePractice;$("newPractice").onclick=makePractice;
+$("checkPractice").onclick=()=>{let v=Number($("practiceInput").value),f=$("practiceFeedback");if($("practiceInput").value===""){f.className="feedback bad";f.textContent="اول پاسخ را وارد کن.";return}if(v===pData.x){f.className="feedback good";f.textContent="آفرین! پاسخ درست است. رابطه زاویه‌ها را درست به کار بردی.";addScore(10)}else{f.className="feedback bad";f.textContent="هنوز درست نیست. دوباره رابطه را بررسی کن؛ "+(pData.type==="sum"?"مجموع دو زاویه روی خط راست ۱۸۰ درجه است.":pData.type==="right"?"مجموع زاویه‌های متمم ۹۰ درجه است.":pData.type==="poly"?"مجموع زاویه‌های داخلی برابر (n−2)×۱۸۰ است.":"زاویه‌های برابر را مساوی قرار بده.")}};
+makePractice();
+
+function questionPool(){let a=[];for(let i=0;i<1000;i++){let k=i%5,n=3+(i%7),x=2+(i*7%35),u=20+(i*13%120),v=180-u;
+if(k===0)a.push({topic:"parallel",q:`دو خط موازی با یک خط مورب قطع شده‌اند. اگر یک زاویه ${u}° باشد، زاویه متناظر آن چند درجه است؟`,ans:u,opts:[u,180-u,90,(u+30)%180],why:"زاویه‌های متناظر در دو خط موازی برابرند."});
+if(k===1)a.push({topic:"perpendicular",q:`دو خط بر هم عمودند. اندازه هر زاویه‌ای که می‌سازند چند درجه است؟`,ans:90,opts:[45,60,90,180],why:"خطوط عمود چهار زاویه قائمه می‌سازند."});
+if(k===2){let sum=(n-2)*180;a.push({topic:"polygon",q:`مجموع زاویه‌های داخلی یک ${n} ضلعی چند درجه است؟`,ans:sum,opts:[sum,sum-180,sum+180,n*180],why:"فرمول مجموع زاویه‌های داخلی: (n−۲)×۱۸۰."})}
+if(k===3){let b=1+i%3,c=10+i%25,sol=10+i%20,aa=2+i%3,dd=aa*sol+c;a.push({topic:"x",q:`دو زاویه برابرند. اگر یکی ${aa}x+${c} و دیگری ${b}x+${dd} باشد، x چند است؟`,ans:sol,opts:[sol,sol+2,Math.max(1,sol-3),sol*2],why:"دو عبارت را مساوی قرار بده و معادله را حل کن."})}
+if(k===4)a.push({topic:"reason",q:`اگر دو زاویه متقابل به رأس باشند و یکی ${u}° باشد، دیگری چند درجه است؟`,ans:u,opts:[u,180-u,90,360-u],why:"زاویه‌های متقابل به رأس با هم برابرند."});
 }
-$('slope').oninput=updateSlope;updateSlope();
-function updatePerp(){
-let a=+$('perpRange').value;
-$('perpVal').textContent=fa(a)+'°';
-$('perpMsg').textContent=a===90?'دو خط بر هم عمودند ⟂':a<90?'زاویه تند است؛ دو خط عمود نیستند.':'زاویه باز است؛ دو خط عمود نیستند.';
-let rad=a*Math.PI/180;
-$('right').setAttribute('x1',180-145*Math.cos(rad));
-$('right').setAttribute('y1',120+145*Math.sin(rad));
-$('right').setAttribute('x2',180+145*Math.cos(rad));
-$('right').setAttribute('y2',120-145*Math.sin(rad));
-}
-$('perpRange').oninput=updatePerp;updatePerp();
-function drawPoly(){
-let n=+$('sides').value,sum=(n-2)*180;
-$('sidesVal').textContent=fa(n);$('sumPoly').textContent=fa(sum)+'°';
-$('eachPoly').textContent=fa(sum/n)+'°';
-$('polyExplain').textContent=`فرمول: (${n}−۲)×۱۸۰ = ${sum} درجه`;
-let pts=[];
-for(let i=0;i<n;i++){let a=2*Math.PI*i/n-Math.PI/2;pts.push(`${180+105*Math.cos(a)},${130+105*Math.sin(a)}`)}
-$('polygon').innerHTML=`<polygon points="${pts.join(' ')}" fill="var(--accent)" fill-opacity=".18" stroke="var(--accent2)" stroke-width="4"/>`;
-}
-$('sides').oninput=drawPoly;drawPoly();
-function fmt(n){return Number.isInteger(n)?fa(n):fa(+n.toFixed(2))}
-function updateX(){
-let a=+$('x1').value,b=+$('x2').value,c=+$('x3').value;
-$('xlab').textContent=fmt(a)+'x '+(b<0?'− ':'+ ')+fmt(Math.abs(b))+' = '+fmt(c);
-}
-['x1','x2','x3'].forEach(id=>$(id).oninput=updateX);updateX();
-$('solve').onclick=()=>{
-let a=+$('x1').value,b=+$('x2').value,c=+$('x3').value,r=$('xresult');
-r.classList.remove('hidden');
-if(a===0){r.textContent=b===c?'معادله بی‌نهایت جواب دارد.':'معادله جواب ندارد.';return}
-let x=(c-b)/a;r.textContent=`${fmt(a)}x = ${fmt(c-b)}؛ پس x = ${fmt(x)}`;
-r.className='feedback good';
-};
-let score=0,correct=0,done=0,question=null,number=0;
-const names={line:'زاویه‌های روی خط',vertical:'متقابل به رأس',parallel:'خطوط موازی',triangle:'مثلث',quad:'چهارضلعی',polygon:'چندضلعی',regular:'منتظم',perp:'تعامد'};
-const topics=Object.keys(names);
-function makeQuestion(t){
-let a,b,c,n,ans,q,ex;
-if(t==='line'){a=20+Math.floor(Math.random()*140);ans=180-a;q=`اگر یکی از دو زاویه مجاور روی خط راست ${a} درجه باشد، زاویه دیگر چند درجه است؟`;ex=`مجموع زاویه‌های روی خط راست ۱۸۰ درجه است؛ ۱۸۰−${a}=${ans}.`}
-else if(t==='vertical'){a=15+Math.floor(Math.random()*150);ans=a;q=`اگر یک زاویه در تقاطع دو خط ${a} درجه باشد، زاویه متقابل به رأس آن چند درجه است؟`;ex='زاویه‌های متقابل به رأس برابرند.'}
-else if(t==='parallel'){a=20+Math.floor(Math.random()*140);ans=a;q=`در دو خط موازی، زاویه متناظر با زاویه ${a} درجه چند درجه است؟`;ex='زاویه‌های متناظر در دو خط موازی برابرند.'}
-else if(t==='triangle'){a=30+Math.floor(Math.random()*70);b=30+Math.floor(Math.random()*(130-a));ans=180-a-b;q=`دو زاویه مثلث ${a} و ${b} درجه‌اند. زاویه سوم چند درجه است؟`;ex=`۱۸۰−${a}−${b}=${ans}.`}
-else if(t==='quad'){a=50+Math.floor(Math.random()*80);b=50+Math.floor(Math.random()*80);c=50+Math.floor(Math.random()*80);ans=360-a-b-c;q=`سه زاویه چهارضلعی ${a}، ${b} و ${c} درجه‌اند. زاویه چهارم چند درجه است؟`;ex=`مجموع زاویه‌ها ۳۶۰ است: ۳۶۰−${a}−${b}−${c}=${ans}.`}
-else if(t==='polygon'){n=3+Math.floor(Math.random()*8);ans=(n-2)*180;q=`مجموع زاویه‌های داخلی یک ${n} ضلعی چند درجه است؟`;ex=`فرمول (n−۲)×۱۸۰ است: ${ans} درجه.`}
-else if(t==='regular'){n=[3,4,5,6,8,9,10,12][Math.floor(Math.random()*8)];ans=(n-2)*180/n;q=`هر زاویه داخلی یک چندضلعی منتظم ${n} ضلعی چند درجه است؟`;ex=`مجموع ${(n-2)*180} است؛ تقسیم بر ${n} می‌شود ${ans}.`}
-else{ans=90;q='زاویه بین دو خط عمود چند درجه است؟';ex='دو خط عمود زاویه ۹۰ درجه می‌سازند.'}
-let opts=new Set([ans]);
-while(opts.size<4){let d=[-30,-20,-10,10,20,30][Math.floor(Math.random()*6)];let v=ans+d;if(v>=0&&v<=360)opts.add(v)}
-return {t,q,ans,ex,opts:[...opts].sort(()=>Math.random()-.5)};
-}
-function nextQuestion(){
-let t=$('topic').value;
-if(t==='all')t=topics[Math.floor(Math.random()*topics.length)];
-question=makeQuestion(t);number++;
-$('bankQuestion').textContent=question.q;
-$('bankMeta').textContent=`سؤال ${fa((number-1)%1000+1)} از ۱۰۰۰ · ${names[t]}`;
-$('bankChoices').innerHTML='';$('bankFeedback').className='feedback hidden';
-question.opts.forEach(v=>{
-let b=document.createElement('button');b.textContent=fmt(v)+'°';
-b.onclick=()=>answer(v,b);$('bankChoices').appendChild(b);
-});
-$('bankProgress').style.width=((number%100)/100*100)+'%';
-}
-function answer(v,btn){
-if(btn.disabled)return;done++;
-let ok=v===question.ans;
-if(ok){score+=10;correct++;$('bankFeedback').textContent='آفرین! پاسخ درست است؛ ۱۰ امتیاز گرفتی.';$('bankFeedback').className='feedback good'}
-else{$('bankFeedback').textContent='پاسخ درست: '+fmt(question.ans)+'°';$('bankFeedback').className='feedback bad'}
-document.querySelectorAll('#bankChoices button').forEach(b=>b.disabled=true);
-$('bankFeedback').textContent+=' توضیح: '+question.ex;
-$('score').textContent=fa(score);$('correctCount').textContent=fa(correct);$('doneCount').textContent=fa(done);
-}
-$('newSet').onclick=nextQuestion;$('nextBank').onclick=nextQuestion;
-$('topic').onchange=()=>{number=0;nextQuestion()};
-$('resetStats').onclick=()=>{score=correct=done=0;number=0;$('score').textContent=$('correctCount').textContent=$('doneCount').textContent='۰';nextQuestion()};
-nextQuestion();
+return a}
+const pool=questionPool();$("bankCount").textContent="۱۰۰۰";
+function shuffle(arr){return arr.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])}
+function renderBank(){let topic=$("bankTopic").value,arr=pool.filter(q=>topic==="all"||q.topic===topic);let items=shuffle(arr).slice(0,10);$("bankList").innerHTML="";items.forEach((q,i)=>{let d=document.createElement("div");d.className="rowitem";d.innerHTML=`<div><span class="pill">${{parallel:"توازی",perpendicular:"تعامد",polygon:"چندضلعی",x:"محاسبه x",reason:"استدلال"}[q.topic]}</span><div>${i+1}. ${q.q}</div></div><button class="secondary">پاسخ</button>`;d.querySelector("button").onclick=()=>{d.querySelector("button").textContent=fa(q.ans)+"°";d.querySelector("button").title=q.why};$("bankList").appendChild(d)})}
+$("generateBank").onclick=renderBank;$("bankTopic").onchange=renderBank;$("randomBank").onclick=()=>{let q=pool[Math.floor(Math.random()*pool.length)];alert(q.q+"\n\nپاسخ: "+q.ans+"\n"+q.why)};renderBank();
+
+function startQuiz(){quiz=shuffle(pool).slice(0,10);qi=0;qAnswered=false;renderQuiz()}
+function renderQuiz(){if(qi>=10){$("quizArea").innerHTML=`<h2>آزمون تمام شد!</h2><p>نتیجه: ${fa(quiz.filter((q,i)=>q.done).length)} از ۱۰</p>`;$("quizProgress").textContent="پایان";$("quizBar").style.width="100%";return}
+let q=quiz[qi];qAnswered=false;$("quizProgress").textContent=`سؤال ${fa(qi+1)} از ۱۰`;$("quizBar").style.width=(qi*10)+"%";$("quizArea").innerHTML=`<div class="question">${q.q}</div><div class="answers">${shuffle(q.opts).map(o=>`<button class="answer" data-v="${o}">${fa(o)}${q.topic==="polygon"||q.topic==="parallel"||q.topic==="perpendicular"||q.topic==="reason"?"°":""}</button>`).join("")}</div><div id="qWhy" class="feedback"></div>`;document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{if(qAnswered)return;qAnswered=true;let ok=Number(b.dataset.v)===q.ans;q.done=ok;if(ok){b.classList.add("selected");addScore(10)}else b.style.borderColor="var(--bad)";let f=$("qWhy");f.className="feedback "+(ok?"good":"bad");f.textContent=(ok?"آفرین، درست است. ":"پاسخ درست: "+fa(q.ans)+". ")+q.why;document.querySelectorAll(".answer").forEach(x=>x.disabled=true)})}
+$("nextQuiz").onclick=()=>{if(!qAnswered){$("quizFeedback").className="feedback bad";$("quizFeedback").textContent="اول یک گزینه انتخاب کن.";return}qi++;renderQuiz()};$("restartQuiz").onclick=startQuiz;startQuiz();
 </script>
 </body>
 </html>
